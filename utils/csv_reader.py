@@ -11,11 +11,12 @@ Example:
 ...     name: str
 ...     age: int
 ...
->>> people = parse_csv_to_dataclass("people.csv", Person, delimiter=",")
+>>> people = parse_csv_to_dataclass_dict("people.csv", Person, delimiter=",")
 >>> print(people[0].name)
 John Doe
 """
 import csv
+import enum
 from dataclasses import fields, is_dataclass
 from typing import Type, TypeVar, List
 
@@ -23,7 +24,7 @@ from typing import Type, TypeVar, List
 T = TypeVar('T')
 
 
-def parse_csv_to_dataclass(filepath: str, cls: Type[T], delimiter: str) -> List[T]:
+def parse_csv_to_dataclass_dict(filepath: str, cls: Type[T], delimiter: str) -> dict[int, T]:
     """
     Parses a CSV file into a list of instances of the given dataclass.
 
@@ -47,7 +48,7 @@ def parse_csv_to_dataclass(filepath: str, cls: Type[T], delimiter: str) -> List[
 
     with open(filepath, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=delimiter)
-        result = []
+        result = {}
         cls_fields = {f.name: f.type for f in fields(cls)}
 
         for row in reader:
@@ -56,7 +57,9 @@ def parse_csv_to_dataclass(filepath: str, cls: Type[T], delimiter: str) -> List[
                 if key in cls_fields:
                     field_type = cls_fields[key]
                     try:
-                        if field_type == int:
+                        if isinstance(field_type, type) and issubclass(field_type, enum.Enum):
+                            kwargs[key] = field_type(int(value))
+                        elif field_type == int:
                             kwargs[key] = int(value)
                         elif field_type == float:
                             kwargs[key] = float(value)
@@ -66,5 +69,8 @@ def parse_csv_to_dataclass(filepath: str, cls: Type[T], delimiter: str) -> List[
                             kwargs[key] = value
                     except Exception as e:
                         raise ValueError(f"Error converting field '{key}' to {field_type}: {e}") from e
-            result.append(cls(**kwargs))
+            cls_object = cls(**kwargs)
+            if not hasattr(cls_object, 'id'):
+                raise ValueError(f"Dataclass {cls.__name__} must have an 'id' field to use as key")
+            result[cls_object.id] = cls_object
         return result

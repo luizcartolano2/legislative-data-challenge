@@ -22,5 +22,5 @@ class Legislators:
     """
     id: int  # pylint: disable=invalid-name
     name: str
-    num_supported_bills: int = None
-    num_opposed_bills: int = None
+    num_supported_bills: int = 0
+    num_opposed_bills: int = 0
