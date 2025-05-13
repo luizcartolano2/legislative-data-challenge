@@ -5,6 +5,7 @@ cast by a legislator, including the vote's identifier, the legislator's ID, the 
 and the type of vote (e.g., for, against, abstain).
 """
 from dataclasses import dataclass
+from .vote_type import VoteType
 
 
 @dataclass
@@ -16,7 +17,7 @@ class VoteResults:
         id (int): The unique identifier for the vote result.
         legislator_id (int): The unique identifier of the legislator who cast the vote.
         vote_id (int): The identifier for the specific vote.
-        vote_type (int): The type of vote (e.g., for, against, abstain).
+        vote_type (VoteType): The type of vote (e.g., for, against, abstain).
 
     Example:
         vote_result = VoteResults(id=1, legislator_id=1001, vote_id=10, vote_type=1)
@@ -24,4 +25,4 @@ class VoteResults:
     id: int  # pylint: disable=invalid-name
     legislator_id: int
     vote_id: int
-    vote_type: int
+    vote_type: VoteType
