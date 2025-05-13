@@ -18,7 +18,7 @@ Output:
     - output/bills.csv: Each bill with updated sponsor and vote count information.
 """
 from handlers import assign_bill_primary_sponsors, assign_bill_vote_counts
-from models import Bills, Legislators, VoteResults, Votes, VoteType
+from models import Bills, Legislators, VoteResults, Votes
 from utils import parse_csv_to_dataclass_dict, write_objects_to_csv
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ Output:
     - output/legislators-support-oppose-count.csv: Legislators with updated support and opposition counts.
 """
 from handlers import assign_legislator_vote_counts
-from models import Legislators, VoteResults, VoteType
+from models import Legislators, VoteResults
 from utils import parse_csv_to_dataclass_dict, write_objects_to_csv
 
 if __name__ == "__main__":

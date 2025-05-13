@@ -18,8 +18,7 @@ John Doe
 import csv
 import enum
 from dataclasses import fields, is_dataclass
-from typing import Type, TypeVar, List
-
+from typing import Type, TypeVar
 
 T = TypeVar('T')
 
@@ -41,7 +40,7 @@ def parse_csv_to_dataclass_dict(filepath: str, cls: Type[T], delimiter: str) -> 
         delimiter (str): The delimiter used in the CSV file (e.g., ',', ';', '\t').
 
     Returns:
-        List[T]: A list of dataclass instances created from the CSV data.
+        dict[int, T]: A dict of dataclass instances created from the CSV data.
     """
     if not is_dataclass(cls):
         raise ValueError(f"{cls} must be a dataclass type")
