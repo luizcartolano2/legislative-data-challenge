@@ -1,6 +1,4 @@
 """
-bill_vote_aggregator.py
-
 This script aggregates data about bills, including identifying the primary sponsor for each bill
 and counting how many legislators supported or opposed each bill.
 
