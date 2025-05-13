@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Bill:
+class BillCount:
     """
     Represents a legislative bill with details about its support and opposition.
 
