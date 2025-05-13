@@ -2,15 +2,18 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Package           | Version          |
+|-------------------| ------------------ |
+| astroid           |3.3.10|
+| dill              |0.4.0|
+| isort             |6.0.1|
+| mccabe            |0.7.0|
+| platformdirs      |4.3.8|
+| pylint            |3.3.7|
+| tomli             |2.2.1|
+| tomlkit           |0.13.2|
+| typing_extensions |4.13.2|
+| pytest            |8.3.5|
 
 ## Reporting a Vulnerability
 
